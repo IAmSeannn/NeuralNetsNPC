@@ -1,0 +1,58 @@
+When you create a training set you have to note, that 
+all values have to be in interval (0..1).
+
+
+How to use Neural Network:
+
+1) You have to make a training set.
+		Example: 
+		
+		1 		0		0
+		1		0.1		1
+		0.7 	0.1 	1
+		0.3 	0.1 	0.5
+		
+	First number is a normalized Health of bot
+	Second number is a normalized Number of Zombies near bot (suppose 10 zombies is max value. 0.1 - means one zombi, 0.2 - two zombies)
+	The last number is a result  (in script we check: if(res<0.3) then do nothing; if(res>0.3 && res<0.6) run away; if(res>0.6) shoot)
+
+2) Open the AI window:  Window --> AI
+
+3) Fill in first to string fields
+			Example:
+			Assets\AI\DataAI\StudyFile.txt
+			Assets\AI\DataAI\Save.txt
+			
+4) Number of layers usually from 4 to 7
+   In this example we have two input parameters and one output. 			
+   That's why first layer have two neurons, last layer have one neuron.
+   You can experiment choosing various numbers of neurons in hidden layers (all layers exept first and last)
+   			Example:
+   			
+   			Layers = 4
+   			Number of neurons in layer one = 2
+   			Number of neurons in layer two = 10
+   			Number of neurons in layer three = 10
+   			Number of neurons in layer four = 1
+   			
+5) Click button "Create and Study AI" and wait from several seconds to several minutes.  
+
+6) Now the network done. To control the bot use class "Control" 			
+			Example C#:
+			//----------------------------------------------
+			Control myControl = new Control(SaveFileFolder);  
+			myControl.LoadFromFile();
+			//----------------------------------------------
+			
+			//Network loaded. 
+			Usage Example:
+			//----------------------------------------------
+			float[] output = myControl.Manipulate(Input)
+			//----------------------------------------------
+			
+			//the output is the array of outputs
+			//in my example script (SmartBot.cs) i use only one output.
+			
+   
+
+
